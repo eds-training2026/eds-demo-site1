@@ -2,8 +2,8 @@
 .carousel-container {
   position: relative;
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
   overflow: hidden;
   background-color: #f5f5f5;
   border-radius: 8px;
@@ -81,7 +81,7 @@
 /* Tablet - Medium Screens */
 @media (max-width: 1024px) {
   .carousel-container {
-    max-width: 100%;
+    aspect-ratio: 4 / 3;
   }
 }
 
