@@ -1,10 +1,10 @@
-header {
+.header {
   background-color: var(--light-color);
   font-size: var(--body-font-size-m);
   border-bottom: 1px solid var(--border-color);
 }
 
-header .header > div {
+.header > div {
   margin: auto;
   max-width: 1200px;
   padding: 20px 24px;
@@ -13,34 +13,34 @@ header .header > div {
   justify-content: space-between;
 }
 
-header .header nav {
+.header nav {
   display: flex;
   gap: 30px;
 }
 
-header .header nav a {
+.header nav a {
   text-decoration: none;
   color: var(--text-color);
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
-header .header nav a:hover {
+.header nav a:hover {
   color: var(--primary-color);
 }
 
-header .header p {
+.header p {
   margin: 0;
 }
 
 @media (width >= 900px) {
-  header .header > div {
+  .header > div {
     padding: 20px 32px;
   }
 }
 
 @media (width < 900px) {
-  header .header nav {
+  .header nav {
     gap: 15px;
     font-size: var(--body-font-size-xs);
   }
