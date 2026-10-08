@@ -13,9 +13,22 @@
   justify-content: space-between;
 }
 
-.header nav {
+.header nav,
+.header nav ul,
+.header nav ol {
   display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header nav {
   gap: 30px;
+}
+
+.header nav li {
+  display: flex;
+  align-items: center;
 }
 
 .header nav a {
@@ -40,7 +53,9 @@
 }
 
 @media (width < 900px) {
-  .header nav {
+  .header nav,
+  .header nav ul,
+  .header nav ol {
     gap: 15px;
     font-size: var(--body-font-size-xs);
   }
