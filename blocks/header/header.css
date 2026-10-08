@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
 }
 
 .header nav,
@@ -26,9 +27,17 @@
   gap: 30px;
 }
 
+.header nav ul,
+.header nav ol {
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+}
+
 .header nav li {
   display: flex;
   align-items: center;
+  list-style: none;
 }
 
 .header nav a {
@@ -53,10 +62,22 @@
 }
 
 @media (width < 900px) {
+  .header > div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .header nav,
   .header nav ul,
   .header nav ol {
+    width: 100%;
     gap: 15px;
     font-size: var(--body-font-size-xs);
+  }
+
+  .header nav ul,
+  .header nav ol {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
