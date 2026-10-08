@@ -1,22 +1,38 @@
-export default function decorate(block) {
-  /* Convert block structure into an HTML table */
+/*
+ * Table Block
+ * Recreate a table
+ * https://www.hlx.live/developer/block-collection/table
+ */
+
+function buildCell(rowIndex) {
+  const cell = rowIndex ? document.createElement('td') : document.createElement('th');
+  if (!rowIndex) cell.setAttribute('scope', 'col');
+  return cell;
+}
+
+export default async function decorate(block) {
   const table = document.createElement('table');
-  
-  [...block.children].forEach((row, rowIndex) => {
-    const tr = document.createElement('tr');
-    const rowCells = [...row.children];
-    
-    /* First row becomes table header */
-    const elementType = rowIndex === 0 ? 'th' : 'td';
-    
-    rowCells.forEach((cell) => {
-      const element = document.createElement(elementType);
-      element.innerHTML = cell.innerHTML;
-      tr.append(element);
+  const thead = document.createElement('thead');
+  const tbody = document.createElement('tbody');
+
+  const header = !block.classList.contains('no-header');
+  if (header) table.append(thead);
+  table.append(tbody);
+
+  [...block.children].forEach((child, i) => {
+    const row = document.createElement('tr');
+    if (header && i === 0) thead.append(row);
+    else tbody.append(row);
+    [...child.children].forEach((col) => {
+      const cell = buildCell(header ? i : i + 1);
+      const align = col.getAttribute('data-align');
+      const valign = col.getAttribute('data-valign');
+      if (align) cell.style.textAlign = align;
+      if (valign) cell.style.verticalAlign = valign;
+      cell.innerHTML = col.innerHTML;
+      row.append(cell);
     });
-    
-    table.append(tr);
   });
-  
-  block.replaceChildren(table);
+  block.innerHTML = '';
+  block.append(table);
 }

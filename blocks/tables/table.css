@@ -1,31 +1,67 @@
-.tables table {
+.table {
   width: 100%;
-  border-collapse: collapse;
-  margin: 16px 0;
-  background-color: var(--background-color);
+  overflow-x: auto;
 }
 
-.tables table th,
-.tables table td {
-  border: 1px solid #dadada;
-  padding: 12px 16px;
+.table table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  font-size: var(--body-font-size-xs);
+}
+
+@media (width >= 600px) {
+  .table table {
+    font-size: var(--body-font-size-s);
+  }
+}
+
+@media (width >= 900px) {
+  .table table {
+    font-size: var(--body-font-size-m);
+  }
+}
+
+.table table thead tr {
+  border-top: 2px solid #dadada;
+  border-bottom: 2px solid #dadada;
+}
+
+.table table tbody tr {
+  border-bottom: 1px solid #dadada;
+}
+
+.table table th {
+  font-weight: 700;
+}
+
+.table table th,
+.table table td {
+  padding: 0.5em;
   text-align: left;
 }
 
-.tables table th {
-  background-color: #f5f5f5;
-  font-weight: 600;
-  color: #333;
+.table table th p,
+.table table td p {
+  margin: 0;
 }
 
-.tables table tbody tr:hover {
-  background-color: #fafafa;
+.table table td p + p {
+  margin-top: 0.25em;
 }
 
-.tables table tbody tr:nth-child(odd) {
-  background-color: #ffffff;
+/* no header variant */
+.table.no-header table tbody tr {
+  border-top: 1px solid #dadada;
 }
 
-.tables table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+/* striped variant */
+.table.striped tbody tr:nth-child(odd) {
+  background-color: var(--light-color);
+}
+
+/* bordered variant */
+.table.bordered table th,
+.table.bordered table td {
+  border: 1px solid #dadada;
 }
