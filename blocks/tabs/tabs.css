@@ -1,0 +1,51 @@
+/* Tabs Component Styles */
+
+.tabs {
+  width: 100%;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tabs__list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+
+.tabs__tab {
+  margin: 0;
+  padding: 0;
+}
+
+.tabs__button {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #666;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.tabs__button:hover {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.tabs__button[aria-selected="true"] {
+  border-bottom-color: #0066cc;
+  color: #0066cc;
+}
+
+.tabs__panel {
+  display: none;
+  padding: 20px 0;
+}
+
+.tabs__panel[role="tabpanel"] {
+  display: block;
+}
