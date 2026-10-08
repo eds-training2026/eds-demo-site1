@@ -1,9 +1,20 @@
 /* header and nav layout */
+:root {
+  --nav-shadow: 0 10px 30px rgba(0 0 0 / 8%);
+  --nav-border: rgba(0 0 0 / 8%);
+  --nav-link-hover: rgba(0 0 0 / 4%);
+  --nav-transition: 200ms ease;
+}
+
 header .nav-wrapper {
-  background-color: var(--background-color);
+  background-color: color-mix(in srgb, var(--background-color) 92%, white 8%);
   width: 100%;
   z-index: 2;
   position: fixed;
+  border-bottom: 1px solid var(--nav-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 rgba(0 0 0 / 4%);
 }
 
 header nav {
@@ -19,6 +30,7 @@ header nav {
   height: var(--nav-height);
   padding: 0 24px;
   font-family: var(--body-font-family);
+  transition: box-shadow var(--nav-transition), min-height var(--nav-transition);
 }
 
 header nav[aria-expanded='true'] {
@@ -28,11 +40,14 @@ header nav[aria-expanded='true'] {
     'tools tools' var(--nav-height) / auto 1fr;
   overflow-y: auto;
   min-height: 100dvh;
+  box-shadow: var(--nav-shadow);
 }
 
 @media (width >= 900px) {
   header .nav-wrapper {
     position: relative;
+    border-bottom-color: rgba(0 0 0 / 6%);
+    box-shadow: 0 1px 0 rgba(0 0 0 / 3%);
   }
 
   header nav {
@@ -51,6 +66,13 @@ header nav p {
 
 header nav a:any-link {
   color: currentcolor;
+  text-decoration: none;
+  transition: opacity var(--nav-transition), background-color var(--nav-transition);
+}
+
+header nav a:any-link:hover,
+header nav a:any-link:focus-visible {
+  opacity: 0.9;
 }
 
 /* hamburger */
@@ -65,13 +87,20 @@ header nav .nav-hamburger button {
   height: 22px;
   margin: 0;
   border: 0;
-  border-radius: 0;
+  border-radius: 999px;
   padding: 0;
-  background-color: var(--background-color);
+  background-color: transparent;
   color: inherit;
   overflow: initial;
   text-overflow: initial;
   white-space: initial;
+  cursor: pointer;
+  transition: background-color var(--nav-transition), transform var(--nav-transition);
+}
+
+header nav .nav-hamburger button:hover,
+header nav .nav-hamburger button:focus-visible {
+  background-color: var(--nav-link-hover);
 }
 
 header nav .nav-hamburger-icon,
@@ -81,6 +110,7 @@ header nav .nav-hamburger-icon::after {
   display: block;
   position: relative;
   width: 20px;
+  transition: transform var(--nav-transition), top var(--nav-transition), bottom var(--nav-transition), width var(--nav-transition), opacity var(--nav-transition);
 }
 
 header nav .nav-hamburger-icon::before,
@@ -146,6 +176,7 @@ header .nav-brand {
 header nav .nav-brand img {
   width: 128px;
   height: auto;
+  display: block;
 }
 
 /* sections */
@@ -160,12 +191,14 @@ header nav[aria-expanded='true'] .nav-sections {
   display: block;
   visibility: visible;
   align-self: start;
+  padding-block: 8px 24px;
 }
 
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
   font-size: var(--body-font-size-s);
+  margin: 0;
 }
 
 header nav .nav-sections ul > li {
@@ -178,6 +211,13 @@ header nav .nav-sections .nav-drop > button {
   position: relative;
   padding-right: 16px;
   cursor: pointer;
+  border-radius: 6px;
+  transition: background-color var(--nav-transition), opacity var(--nav-transition);
+}
+
+header nav .nav-sections .nav-drop > button:hover,
+header nav .nav-sections .nav-drop > button:focus-visible {
+  background-color: var(--nav-link-hover);
 }
 
 header nav .nav-sections .nav-drop > button::after {
@@ -191,6 +231,7 @@ header nav .nav-sections .nav-drop > button::after {
   border: 2px solid currentcolor;
   border-radius: 0 1px 0 0;
   border-width: 2px 2px 0 0;
+  transition: transform var(--nav-transition), top var(--nav-transition), bottom var(--nav-transition);
 }
 
 header nav .nav-sections .nav-drop > button[aria-expanded='true']::after {
@@ -206,6 +247,7 @@ header nav .nav-sections .nav-drop > button:focus-visible {
 
 header nav .nav-sections ul > li > ul {
   margin-top: 0;
+  padding-top: 8px;
 }
 
 header nav .nav-sections ul > li > ul > li {
@@ -221,17 +263,28 @@ header nav .nav-sections .nav-drop > button[aria-expanded='false'] + ul {
     display: block;
     visibility: visible;
     white-space: nowrap;
+    align-self: center;
   }
 
   header nav .nav-sections ul {
     display: flex;
     gap: 24px;
     margin: 0;
+    align-items: center;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
     flex: 0 1 auto;
     position: relative;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > a,
+  header nav .nav-sections .default-content-wrapper > ul > li > button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 8px 10px;
+    border-radius: 8px;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
@@ -248,6 +301,9 @@ header nav .nav-sections .nav-drop > button[aria-expanded='false'] + ul {
     padding: 16px;
     background-color: var(--light-color);
     white-space: initial;
+    border-radius: 12px;
+    border: 1px solid rgba(0 0 0 / 6%);
+    box-shadow: var(--nav-shadow);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
@@ -270,4 +326,54 @@ header nav .nav-sections .nav-drop > button[aria-expanded='false'] + ul {
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+header nav .nav-tools a,
+header nav .nav-tools button {
+  border-radius: 999px;
+  transition: background-color var(--nav-transition), transform var(--nav-transition), opacity var(--nav-transition);
+}
+
+header nav .nav-tools a:hover,
+header nav .nav-tools a:focus-visible,
+header nav .nav-tools button:hover,
+header nav .nav-tools button:focus-visible {
+  background-color: var(--nav-link-hover);
+}
+
+@media (max-width: 899px) {
+  header nav .nav-sections ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-block: 8px;
+  }
+
+  header nav .nav-sections ul > li {
+    width: 100%;
+  }
+
+  header nav .nav-sections .nav-drop > button {
+    width: 100%;
+    padding: 10px 16px;
+    border-radius: 8px;
+  }
+
+  header nav .nav-sections ul > li > ul {
+    padding-left: 12px;
+    padding-top: 8px;
+  }
+}
+
+header nav .nav-tools a:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
 }
