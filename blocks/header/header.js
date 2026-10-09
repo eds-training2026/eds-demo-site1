@@ -1,34 +1,68 @@
-import { getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../fragment/fragment.js';
+export default function decorate(block) {
+  block.classList.add('header');
+  block.innerHTML = `
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="nav-brand">
+        <img src="/icons/logo.png" alt="Medi Assist logo" />
+        <span>Medi Assist</span>
+      </div>
 
-/**
- * loads and decorates the header
- * @param {Element} block The header block element
- */
-export default async function decorate(block) {
-  // load header as fragment
-  const headerMeta = getMetadata('header');
-  const headerPath = headerMeta ? new URL(headerMeta, window.location).pathname : '/header';
-  const fragment = await loadFragment(headerPath);
+      <ul class="nav-links">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/policies">Policies</a></li>
+        <li><a href="/claims">Claims</a></li>
+        <li><a href="/wellness">Wellness</a></li>
 
-  // decorate header DOM
-  block.textContent = '';
-  const header = document.createElement('div');
-  while (fragment.firstElementChild) header.append(fragment.firstElementChild);
+        <li class="dropdown">
+          <button class="dropdown-toggle" type="button" aria-expanded="false">All Services</button>
+          <ul class="dropdown-menu">
+            <li><a href="/services/health-insurance">Health Insurance</a></li>
+            <li><a href="/services/dental-plans">Dental Plans</a></li>
+            <li><a href="/services/vision-plans">Vision Plans</a></li>
+          </ul>
+        </li>
 
-  // Add hamburger button for mobile navigation
-  const hamburger = document.createElement('button');
-  hamburger.className = 'nav-hamburger';
-  hamburger.setAttribute('aria-label', 'Open navigation');
-  hamburger.innerHTML = '<span></span><span></span><span></span>';
+        <li><a href="/help">Help</a></li>
+        <li><a href="/account">Account</a></li>
+      </ul>
 
-  const nav = header.querySelector('nav');
-  if (nav) {
+      <div class="nav-actions">
+        <span class="notification" aria-label="Notifications">🔔</span>
+        <div class="profile" aria-label="User profile">VS</div>
+      </div>
+
+      <button class="nav-hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  `;
+
+  const navbar = block.querySelector('.navbar');
+  const hamburger = block.querySelector('.nav-hamburger');
+  const dropdown = block.querySelector('.dropdown');
+  const dropdownToggle = block.querySelector('.dropdown-toggle');
+
+  if (hamburger && navbar) {
     hamburger.addEventListener('click', () => {
-      nav.classList.toggle('open');
+      const isOpen = navbar.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
     });
-    header.appendChild(hamburger);
   }
 
-  block.append(header);
+  if (dropdown && dropdownToggle) {
+    dropdownToggle.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const isOpen = dropdown.classList.toggle('open');
+      dropdownToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!dropdown.contains(event.target)) {
+        dropdown.classList.remove('open');
+        dropdownToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 }
