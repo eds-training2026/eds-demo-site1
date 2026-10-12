@@ -12,29 +12,12 @@ header .nav-container,
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 1.5rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   box-sizing: border-box;
-}
-
-/* Brand / Logo Styles */
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: #0f172a;
-  text-decoration: none;
-}
-
-.nav-brand img {
-  height: 32px;
-  width: auto;
-  object-fit: contain;
 }
 
 /* Navigation Links (Desktop) */
@@ -42,99 +25,22 @@ header .nav-container,
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 1.5rem;
+  gap: 2rem;
   margin: 0;
   padding: 0;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #475569;
+  color: #334155;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 1rem;
   transition: color 0.2s ease;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a[aria-current="page"] {
   color: #2563eb;
-}
-
-/* Dropdown Styles */
-.dropdown {
-  position: relative;
-}
-
-.dropdown-toggle {
-  background: none;
-  border: none;
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #475569;
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.dropdown-toggle:hover {
-  color: #2563eb;
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #ffffff;
-  min-width: 200px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
-  list-style: none;
-  padding: 0.5rem 0;
-  margin-top: 0.5rem;
-  z-index: 100;
-}
-
-.dropdown.open .dropdown-menu {
-  display: block;
-}
-
-.dropdown-menu li a {
-  display: block;
-  padding: 0.5rem 1rem;
-  color: #334155;
-}
-
-.dropdown-menu li a:hover {
-  background-color: #f1f5f9;
-  color: #2563eb;
-}
-
-/* Nav Actions (Notifications & Profile) */
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.notification {
-  font-size: 1.25rem;
-  cursor: pointer;
-}
-
-.profile {
-  width: 36px;
-  height: 36px;
-  background-color: #2563eb;
-  color: #ffffff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 0.85rem;
 }
 
 /* Hamburger Menu Button (Hidden on Desktop) */
@@ -148,6 +54,7 @@ header .nav-container,
   width: 24px;
   height: 18px;
   padding: 0;
+  margin-left: auto;
 }
 
 .nav-hamburger span {
@@ -164,10 +71,6 @@ header .nav-container,
     display: flex;
   }
 
-  .nav-actions {
-    display: none;
-  }
-
   .nav-links {
     position: absolute;
     top: 100%;
@@ -176,25 +79,20 @@ header .nav-container,
     background-color: #ffffff;
     flex-direction: column;
     align-items: flex-start;
-    padding: 1.5rem;
+    padding: 1rem 1.5rem;
     gap: 1rem;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
+    box-sizing: border-box;
   }
 
   .navbar.open .nav-links {
-    max-height: 500px;
+    max-height: 300px;
   }
 
-  .dropdown-menu {
-    position: static;
-    box-shadow: none;
-    padding-left: 1rem;
-    margin-top: 0.25rem;
-  }
-
+  /* Hamburger Animation to 'X' when open */
   .navbar.open .nav-hamburger span:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
   }
