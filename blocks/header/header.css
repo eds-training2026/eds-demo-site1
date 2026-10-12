@@ -19,6 +19,9 @@ header .nav-container,
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   box-sizing: border-box;
   background-color: #ff0000;
+  position: relative;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 /* Navigation Links (Desktop) */
@@ -29,6 +32,11 @@ header .nav-container,
   gap: 2rem;
   margin: 0;
   padding: 0;
+  flex: 1;
+}
+
+.nav-links li {
+  margin: 0;
 }
 
 .nav-links a {
@@ -37,6 +45,7 @@ header .nav-container,
   font-weight: 500;
   font-size: 1rem;
   transition: color 0.2s ease;
+  display: block;
 }
 
 .nav-links a:hover,
@@ -56,6 +65,7 @@ header .nav-container,
   height: 18px;
   padding: 0;
   margin-left: auto;
+  z-index: 1001;
 }
 
 .nav-hamburger span {
@@ -68,6 +78,10 @@ header .nav-container,
 
 /* Responsive Styles (Mobile & Tablet) */
 @media (max-width: 768px) {
+  .navbar {
+    flex-wrap: nowrap;
+  }
+
   .nav-hamburger {
     display: flex;
   }
@@ -87,10 +101,15 @@ header .nav-container,
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
     box-sizing: border-box;
+    flex: none;
+  }
+
+  .nav-links li {
+    width: 100%;
   }
 
   .navbar.open .nav-links {
-    max-height: 300px;
+    max-height: 500px;
   }
 
   /* Hamburger Animation to 'X' when open */
