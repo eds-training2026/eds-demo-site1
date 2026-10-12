@@ -2,7 +2,7 @@
 header .nav-container,
 .nav-container {
   width: 100%;
-  background-color: #ffffff;
+  background-color: #ff0000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
@@ -18,6 +18,7 @@ header .nav-container,
   padding: 1rem 1.5rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   box-sizing: border-box;
+  background-color: #ff0000;
 }
 
 /* Navigation Links (Desktop) */
@@ -32,7 +33,7 @@ header .nav-container,
 
 .nav-links a {
   text-decoration: none;
-  color: #334155;
+  color: #ffffff;
   font-weight: 500;
   font-size: 1rem;
   transition: color 0.2s ease;
@@ -40,7 +41,7 @@ header .nav-container,
 
 .nav-links a:hover,
 .nav-links a[aria-current="page"] {
-  color: #2563eb;
+  color: #ffe5e5;
 }
 
 /* Hamburger Menu Button (Hidden on Desktop) */
@@ -61,7 +62,7 @@ header .nav-container,
   display: block;
   width: 100%;
   height: 2px;
-  background-color: #0f172a;
+  background-color: #ffffff;
   transition: all 0.3s ease;
 }
 
@@ -76,7 +77,7 @@ header .nav-container,
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #ffffff;
+    background-color: #ff0000;
     flex-direction: column;
     align-items: flex-start;
     padding: 1rem 1.5rem;
