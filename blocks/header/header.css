@@ -1,6 +1,5 @@
 /* Header & Navbar Container */
-header .nav-container,
-.nav-container {
+.header {
   width: 100%;
   background-color: #ff0000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -13,15 +12,15 @@ header .nav-container,
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  max-width: 1280px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   padding: 1rem 1.5rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   box-sizing: border-box;
   background-color: #ff0000;
   position: relative;
-  flex-wrap: wrap;
   width: 100%;
+  gap: 2rem;
 }
 
 /* Navigation Links (Desktop) */
@@ -33,10 +32,12 @@ header .nav-container,
   margin: 0;
   padding: 0;
   flex: 1;
+  width: auto;
 }
 
 .nav-links li {
   margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
@@ -46,11 +47,13 @@ header .nav-container,
   font-size: 1rem;
   transition: color 0.2s ease;
   display: block;
+  padding: 0.5rem 0;
 }
 
 .nav-links a:hover,
 .nav-links a[aria-current="page"] {
   color: #ffe5e5;
+  text-decoration: underline;
 }
 
 /* Hamburger Menu Button (Hidden on Desktop) */
@@ -71,32 +74,36 @@ header .nav-container,
 .nav-hamburger span {
   display: block;
   width: 100%;
-  height: 2px;
+  height: 3px;
   background-color: #ffffff;
   transition: all 0.3s ease;
+  border-radius: 2px;
 }
 
 /* Responsive Styles (Mobile & Tablet) */
 @media (max-width: 768px) {
   .navbar {
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    align-items: stretch;
   }
 
   .nav-hamburger {
     display: flex;
+    order: 2;
   }
 
   .nav-links {
+    order: 3;
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
     background-color: #ff0000;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem 1.5rem;
-    gap: 1rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    align-items: stretch;
+    padding: 0;
+    gap: 0;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
@@ -106,6 +113,16 @@ header .nav-container,
 
   .nav-links li {
     width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .nav-links li:last-child {
+    border-bottom: none;
+  }
+
+  .nav-links a {
+    padding: 1rem 1.5rem;
+    margin: 0;
   }
 
   .navbar.open .nav-links {
@@ -114,12 +131,30 @@ header .nav-container,
 
   /* Hamburger Animation to 'X' when open */
   .navbar.open .nav-hamburger span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+    transform: translateY(7.5px) rotate(45deg);
   }
+  
   .navbar.open .nav-hamburger span:nth-child(2) {
     opacity: 0;
   }
+  
   .navbar.open .nav-hamburger span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-7.5px) rotate(-45deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .nav-hamburger {
+    width: 20px;
+    height: 16px;
+  }
+
+  .nav-links a {
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
   }
 }
