@@ -1,4 +1,31 @@
+/**
+ * Tries to extract links and text from the authored block content,
+ * falling back to a structured default if the block content is empty.
+ */
+function readBlockContent(block) {
+  const navItems = [];
+  
+  // The block contains the DOM elements authored in da.live
+  const rows = [...block.children];
+  rows.forEach((row) => {
+    const cols = [...row.children];
+    if (cols.length > 0) {
+      const linkEl = cols[0].querySelector('a');
+      const text = cols[0].textContent.trim();
+      const href = linkEl ? linkEl.getAttribute('href') : `#${text.toLowerCase().replace(/\s+/g, '-')}`;
+      if (text) {
+        navItems.push({ text, href });
+      }
+    }
+  });
+
+  return navItems;
+}
+
 export default function decorate(block) {
+  // Read dynamic nav items from the authoring content
+  const dynamicItems = readBlockContent(block);
+
   block.classList.add('header');
   block.innerHTML = `
     <nav class="navbar" aria-label="Main navigation">
@@ -8,11 +35,9 @@ export default function decorate(block) {
       </div>
 
       <ul class="nav-links">
-        <li><a href="/home">Home</a></li>
-        <li><a href="/policies">Policies</a></li>
-        <li><a href="/claims">Claims</a></li>
-        <li><a href="/wellness">Wellness</a></li>
+        ${dynamicItems.map(item => `<li><a href="${item.href}">${item.text}</a></li>`).join('')}
 
+        <!-- Optional dropdown structure kept dynamic if needed -->
         <li class="dropdown">
           <button class="dropdown-toggle" type="button" aria-expanded="false">All Services</button>
           <ul class="dropdown-menu">
@@ -39,6 +64,7 @@ export default function decorate(block) {
     </nav>
   `;
 
+  // Interaction handlers
   const navbar = block.querySelector('.navbar');
   const hamburger = block.querySelector('.nav-hamburger');
   const dropdown = block.querySelector('.dropdown');
